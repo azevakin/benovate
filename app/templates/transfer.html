@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<body>
+    <h1>Для перевода средств заполните форму</h1>
+    <form id="transfer-form" method="POST">{% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit"></input>
+    </form>
+    {% if amount %}
+    <p><strong>Перевод произведен успешно.</strong></p>
+    <p>Списано: {{ amount }}</p>
+    <p>Зачислено:</p>
+    <ul>
+        {% for account in accounts %}
+        <li>{{ account.user }} [ИНН {{account.inn}}]: {{ amount_part }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
